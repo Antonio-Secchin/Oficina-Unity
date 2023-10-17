@@ -6,11 +6,13 @@ public class Personagem : MonoBehaviour
 {
     public float speed = 20.0f;
     private float horizontalInput;
-    public Animator animator;
+    public Animator animator;    
+    private Rigidbody2D rb;
+    public float jumpValue = 2f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,10 @@ public class Personagem : MonoBehaviour
         }
         else if (horizontalInput < 0) {
             gameObject.transform.localScale = new Vector2(-1,1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)){
+            rb.AddForce(Vector2.up * jumpValue,ForceMode2D.Impulse);
         }
     }
 }
